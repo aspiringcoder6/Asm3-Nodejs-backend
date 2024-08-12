@@ -51,9 +51,9 @@ app.use(
     saveUninitialized: false,
     store: store,
     cookie: {
-      httpOnly: true, // Prevents JavaScript access to the cookie
-      secure: false, // Set to true if using HTTPS
-      sameSite: "lax", // or 'strict'
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
     },
   })
 );
