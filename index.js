@@ -12,7 +12,6 @@ const http = require("http");
 const app = express();
 const server = http.createServer(app);
 const fs = require("fs");
-const path = require("path");
 
 const io = require("./socket").init(server);
 const fileStorage = multer.diskStorage({
