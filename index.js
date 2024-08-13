@@ -34,7 +34,6 @@ const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const chatRoute = require("./routes/chatRooms");
 app.use(bodyParser.json());
-
 app.set("trust proxy", true);
 app.use(cookieParser());
 app.use("/images", express.static(path.join(__dirname, "images")));

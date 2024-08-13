@@ -1,4 +1,6 @@
 const Product = require("../model/Product");
+const fs = require("fs");
+const path = require("path");
 //Lấy tất cả product
 exports.getProducts = (req, res, next) => {
   return Product.find()
@@ -87,9 +89,19 @@ exports.updateProduct = async (req, res, next) => {
   }
 };
 exports.deleteProduct = async (req, res, next) => {
-  console.log(1);
   try {
     const productId = req.query.id;
+    const product = await Product.findById(productId);
+    const imgFolder = path.join(__dirname, "..", "images");
+    const imgPaths = [
+      path.join(imgFolder, product.img1),
+      path.join(imgFolder, product.img2),
+      path.join(imgFolder, product.img3),
+      path.join(imgFolder, product.img4),
+    ];
+    imgPaths.forEach((imgPath) => {
+      fs.unlink(imgPath);
+    });
     await Product.deleteOne({ _id: productId });
     return res.status(200).json({ message: "Product deleted successfully" });
   } catch (err) {
