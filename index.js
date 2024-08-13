@@ -16,11 +16,15 @@ const fs = require("fs");
 const io = require("./socket").init(server);
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dirname = path.dirname("images");
-    if (!fs.existsSync(dirname)) {
-      fs.mkdirSync(dirname, { recursive: true });
+    const directory = "images";
+
+    // Ensure the 'images' folder exists
+    if (!fs.existsSync(directory)) {
+      fs.mkdirSync(directory, { recursive: true });
+      console.log(`Directory created successfully: ${directory}`);
     }
-    cb(null, "images");
+
+    cb(null, directory);
   },
   filename: (req, file, cb) => {
     // Get the original file extension
