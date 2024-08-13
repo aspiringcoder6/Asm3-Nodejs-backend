@@ -14,6 +14,10 @@ const server = http.createServer(app);
 const io = require("./socket").init(server);
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
+    const dirname = path.dirname("images");
+    if (!fs.existsSync(dirname)) {
+      fs.mkdirSync(dirname, { recursive: true });
+    }
     cb(null, "images");
   },
   filename: (req, file, cb) => {
