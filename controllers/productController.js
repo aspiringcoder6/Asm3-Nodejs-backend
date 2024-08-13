@@ -52,7 +52,9 @@ exports.createProduct = async (req, res, next) => {
     return res.status(401).json({ message: "No images attached!" });
   }
   const imageUrls = images.map((image) => {
-    return "http://localhost:5000" + `/images/${image.filename}`;
+    return (
+      "https://asm3-nodejs-backend.onrender.com" + `/images/${image.filename}`
+    );
   });
   const newProduct = new Product({
     name,
